@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseBook</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo-section {
+            margin-bottom: 30px;
+        }
+
+        /* Заглушка для картинки - красивый блок в стиле PulseBook */
+        .intro-image-placeholder {
+            width: 100%;
+            max-width: 350px;
+            height: 200px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2a2a5e 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .pulse-line {
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4757 0%, #ff6b7a 50%, #00d4aa 100%);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .medical-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .icon {
+            position: absolute;
+            font-size: 24px;
+            color: #00d4aa;
+        }
+
+        .icon:nth-child(1) { top: 20px; left: 30px; }
+        .icon:nth-child(2) { top: 30px; right: 40px; }
+        .icon:nth-child(3) { bottom: 30px; left: 40px; }
+        .icon:nth-child(4) { bottom: 20px; right: 30px; }
+
+        /* Скрытое изображение - показывается, если файл есть */
+        .intro-image {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
+            display: none; /* По умолчанию скрыто */
+        }
+
+        .intro-text {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .intro-text b {
+            color: #00d4aa;
+        }
+
+        .intro-text i {
+            color: #a0a0a0;
+            font-size: 13px;
+        }
+
+        /* Убираем кнопки - будет только стандартная кнопка START от Telegram */
+
+        .language-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Адаптивность для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .intro-text {
+                padding: 15px;
+                font-size: 13px;
+            }
+
+            .logo-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-indicator" id="languageIndicator">🌍 RU</div>
+    
+    <div class="container">
+        <div class="logo-section">
+            <!-- Реальная картинка (покажется, если файл intro_image.png лежит рядом с HTML) -->
+            <img src="intro_image.png" alt="PulseBook" class="intro-image" id="realImage" onerror="this.style.display='none';">
+            
+            <!-- Красивая заглушка (показывается, если картинки нет) -->
+            <div class="intro-image-placeholder" id="placeholder">
+                <div class="medical-icons">
+                    <div class="icon">🩺</div>
+                    <div class="icon">🧬</div>
+                    <div class="icon">📊</div>
+                    <div class="icon">⚕️</div>
+                </div>
+                <div class="logo-title">PulseBook</div>
+                <div class="pulse-line"></div>
+            </div>
+        </div>
+
+        <div class="intro-text" id="introText">
+            🏥 Это PulseBook — ваш персональный врач-консультант<br><br>
+            
+            ⭐ <b>Топ-5 возможностей, которые удивят:</b><br>
+            🔬 Анализ медицинских снимков (МРТ, УЗИ, ЭКГ, рентген)<br>
+            📋 Расшифровка анализов и медицинских документов<br>
+            💊 Персональные рекомендации по вашим вопросам<br>
+            🧠 Все данные хранятся и учитываются в ответах<br>
+            🩺 Второе мнение по сложным случаям<br><br>
+            
+            ⏱️ <b>Доступен 24/7 как личный врач</b><br>
+            🎯 <b>Точность диагностики 94.7%</b><br>
+            🧠 <b>Более 10 000 медицинских алгоритмов</b><br><br>
+            
+            🇩🇪 <i>Разработано по протоколам ведущих медицинских центров Германии</i>
+        </div>
+
+        <!-- Кнопки убраны - используется стандартная кнопка START от Telegram -->
+    </div>
+
+    <script>
+        // Инициализация Telegram WebApp
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // Языковые тексты
+        const translations = {
+            ru: {
+                indicator: "🌍 RU",
+                text: `🏥 Это PulseBook — ваш персональный врач-консультант<br><br>
+                
+⭐ <b>Топ-5 возможностей, которые удивят:</b><br>
+🔬 Анализ медицинских снимков (МРТ, УЗИ, ЭКГ, рентген)<br>
+📋 Расшифровка анализов и медицинских документов<br>
+💊 Персональные рекомендации по вашим вопросам<br>
+🧠 Все данные хранятся и учитываются в ответах<br>
+🩺 Второе мнение по сложным случаям<br><br>
+
+⏱️ <b>Доступен 24/7 как личный врач</b><br>
+🎯 <b>Точность диагностики 94.7%</b><br>
+🧠 <b>Более 10 000 медицинских алгоритмов</b><br><br>
+
+🇩🇪 <i>Разработано по протоколам ведущих медицинских центров Германии</i>`
+            },
+            uk: {
+                indicator: "🌍 UK",
+                text: `🏥 Це PulseBook — ваш персональний лікар-консультант<br><br>
+
+⭐ <b>Топ-5 можливостей, які здивують:</b><br>
+🔬 Аналіз медичних знімків (МРТ, УЗД, ЕКГ, рентген)<br>
+📋 Розшифрування аналізів та медичних документів<br>
+💊 Персональні рекомендації щодо ваших питань<br>
+🧠 Всі дані зберігаються та враховуються у відповідях<br>
+🩺 Друга думка по складних випадках<br><br>
+
+⏱️ <b>Доступний 24/7 як особистий лікар</b><br>
+🎯 <b>Точність діагностики 94.7%</b><br>
+🧠 <b>Понад 10 000 медичних алгоритмів</b><br><br>
+
+🇩🇪 <i>Розроблено за протоколами провідних медичних центрів Німеччини</i>`
+            },
+            en: {
+                indicator: "🌍 EN",
+                text: `🏥 This is PulseBook — your personal medical consultant<br><br>
+
+⭐ <b>Top-5 capabilities that will amaze you:</b><br>
+🔬 Medical imaging analysis (MRI, ultrasound, ECG, X-ray)<br>
+📋 Lab results and medical documents interpretation<br>
+💊 Personalized recommendations for your questions<br>
+🧠 All data is stored and considered in responses<br>
+🩺 Second opinion on complex cases<br><br>
+
+⏱️ <b>Available 24/7 like a personal doctor</b><br>
+🎯 <b>Diagnostic accuracy 94.7%</b><br>
+🧠 <b>Over 10,000 medical algorithms</b><br><br>
+
+🇩🇪 <i>Developed according to leading German medical centers protocols</i>`
+            },
+            de: {
+                indicator: "🌍 DE",
+                text: `🏥 Das ist PulseBook — Ihr persönlicher Arzt-Berater<br><br>
+
+⭐ <b>Top-5 Fähigkeiten, die Sie überraschen werden:</b><br>
+🔬 Analyse medizinischer Bilder (MRT, Ultraschall, EKG, Röntgen)<br>
+📋 Entschlüsselung von Analysen und medizinischen Dokumenten<br>
+💊 Persönliche Empfehlungen zu Ihren Fragen<br>
+🧠 Alle Daten werden gespeichert und in Antworten berücksichtigt<br>
+🩺 Zweitmeinung bei komplexen Fällen<br><br>
+
+⏱️ <b>24/7 verfügbar wie ein persönlicher Arzt</b><br>
+🎯 <b>Diagnosegenauigkeit 94.7%</b><br>
+🧠 <b>Über 10.000 medizinische Algorithmen</b><br><br>
+
+🇩🇪 <i>Entwickelt nach Protokollen führender deutscher Medizinzentren</i>`
+            }
+        };
+
+        // Автоопределение языка
+        let currentLanguage = 'ru';
+        if (tg.initDataUnsafe?.user?.language_code) {
+            const userLang = tg.initDataUnsafe.user.language_code;
+            if (translations[userLang]) {
+                currentLanguage = userLang;
+            } else if (userLang === 'uk') {
+                currentLanguage = 'uk';
+            } else if (userLang === 'de') {
+                currentLanguage = 'de';
+            } else {
+                currentLanguage = 'en';
+            }
+        }
+
+        // Функция обновления языка
+        function updateLanguage() {
+            const lang = translations[currentLanguage];
+            document.getElementById('languageIndicator').textContent = lang.indicator;
+            document.getElementById('introText').innerHTML = lang.text;
+        }
+
+        // Функция смены языка (по тапу на индикатор языка)
+        function cycleLanguage() {
+            const languages = ['ru', 'uk', 'en', 'de'];
+            const currentIndex = languages.indexOf(currentLanguage);
+            const nextIndex = (currentIndex + 1) % languages.length;
+            currentLanguage = languages[nextIndex];
+            updateLanguage();
+        }
+
+        // Обработчик для смены языка по клику на индикатор
+        document.getElementById('languageIndicator').addEventListener('click', cycleLanguage);
+        document.getElementById('languageIndicator').style.cursor = 'pointer';
+
+        // Проверка картинки
+        document.getElementById('realImage').addEventListener('load', function() {
+            this.style.display = 'block';
+            document.getElementById('placeholder').style.display = 'none';
+        });
+
+        // Инициализация
+        updateLanguage();
+        
+        // Уведомляем Telegram, что приложение готово
+        tg.ready();
+    </script>
+</body>
+</html>
