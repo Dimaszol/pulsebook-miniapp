@@ -1,72 +1,204 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Политика конфиденциальности - PulseBook</title>
+    <title>Privacy Policy - PulseBook</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f8f9fa;
+            animation: fadeIn 1s ease-out;
         }
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+
+        .logo-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .pulse-line {
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4757 0%, #ff6b7a 50%, #00d4aa 100%);
+            border-radius: 2px;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6;
+        }
+
+        .content-section h1 {
+            color: #00d4aa;
+            border-bottom: 2px solid #00d4aa;
             padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
         }
-        h2 {
-            color: #34495e;
-            margin-top: 30px;
+
+        .content-section h2 {
+            color: #ff6b7a;
+            margin: 25px 0 15px 0;
+            font-size: 18px;
         }
+
         .highlight {
-            background-color: #e8f4f8;
+            background-color: rgba(0, 212, 170, 0.1);
             padding: 15px;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #00d4aa;
             margin: 20px 0;
-        }
-        .contact {
-            background-color: #f0f8f0;
-            padding: 20px;
             border-radius: 8px;
-            margin-top: 30px;
         }
+
+        .contact {
+            background-color: rgba(255, 107, 122, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 107, 122, 0.2);
+        }
+
         .lang-switch {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .lang-switch a {
             margin: 0 10px;
             padding: 8px 16px;
-            background: #3498db;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
         }
+
         .lang-switch a:hover {
-            background: #2980b9;
+            background: rgba(0, 212, 170, 0.2);
+            color: #00d4aa;
+            transform: translateY(-2px);
         }
+
         ul {
             padding-left: 20px;
+            margin: 15px 0;
         }
+
         li {
             margin-bottom: 8px;
+        }
+
+        strong {
+            color: #00d4aa;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+
+            .content-section h1 {
+                font-size: 20px;
+            }
+
+            .lang-switch a {
+                margin: 5px;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="index.html" class="back-button">← Back to PulseBook</a>
+        
+        <div class="header">
+            <div class="logo-title">PulseBook Privacy Policy</div>
+            <div class="pulse-line"></div>
+        </div>
+
         <div class="lang-switch">
             <a href="#en">🇬🇧 English</a>
             <a href="#de">🇩🇪 Deutsch</a>
@@ -74,8 +206,120 @@
             <a href="#ru">🇷🇺 Русский</a>
         </div>
 
-        <!-- РУССКИЙ -->
-        <div id="ru">
+        <!-- ENGLISH -->
+        <div id="en" class="content-section">
+            <h1>🔒 PulseBook Privacy Policy</h1>
+            <p><strong>Last updated:</strong> July 1, 2025</p>
+
+            <div class="highlight">
+                <strong>🩺 PulseBook</strong> is an informational medical assistant working through Telegram. 
+                We take your personal data protection and GDPR compliance seriously.
+            </div>
+
+            <h2>📊 What data we collect</h2>
+            <ul>
+                <li><strong>Telegram ID</strong> — for user identification</li>
+                <li><strong>Medical documents</strong> — PDF files and images you upload</li>
+                <li><strong>Chat history</strong> — your messages and bot responses</li>
+                <li><strong>Patient profile</strong> — name, age, questionnaire data</li>
+                <li><strong>Usage data</strong> — statistics for service improvement</li>
+            </ul>
+
+            <h2>🎯 How we use data</h2>
+            <ul>
+                <li>Analyzing medical documents and images</li>
+                <li>Providing personalized recommendations</li>
+                <li>Improving service quality</li>
+                <li>Ensuring platform security</li>
+            </ul>
+
+            <h2>🤖 Third-party data sharing</h2>
+            <p>To ensure service functionality, we share data with the following partners:</p>
+            <ul>
+                <li><strong>OpenAI, Google Gemini</strong> — analysis of uploaded data</li>
+                <li><strong>Stripe</strong> — payment processing</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>⚠️ Important:</strong> We do NOT sell your data to advertisers and do NOT share it with third parties for marketing.
+            </div>
+
+            <h2>🔐 How we protect data</h2>
+            <ul>
+                <li>Data encryption in transit (TLS/SSL)</li>
+                <li>Secure storage in protected database</li>
+                <li>Only you have access to your data</li>
+                <li>Regular encrypted backups</li>
+                <li>24/7 security monitoring</li>
+            </ul>
+
+            <h2>👤 Your rights (GDPR)</h2>
+            <ul>
+                <li><strong>Right to access</strong> — request a copy of your data</li>
+                <li><strong>Right to rectification</strong> — update inaccurate data</li>
+                <li><strong>Right to erasure</strong> — complete account and data deletion</li>
+                <li><strong>Right to portability</strong> — export data in convenient format</li>
+                <li><strong>Right to restriction</strong> — pause data processing</li>
+            </ul>
+
+            <h2>🗑️ Data deletion</h2>
+            <p>You can delete all your data anytime:</p>
+            <ul>
+                <li>Go to <strong>Settings → Profile → Delete all data</strong></li>
+                <li>Confirm deletion with security code</li>
+                <li>All data will be deleted within 24 hours</li>
+            </ul>
+
+            <div class="contact">
+                <h2>📞 Contact</h2>
+                <p>For privacy questions contact:</p>
+                <p><strong>Telegram:</strong> @PulseBookSupport</p>
+                <p><strong>Response time:</strong> within 72 hours</p>
+            </div>
+
+            <h2>📝 Policy changes</h2>
+            <p>We may update this policy when legislation changes or service features change. 
+            We will notify about significant changes through the bot.</p>
+        </div>
+
+        <!-- GERMAN -->
+        <div id="de" class="content-section" style="display: none;">
+            <h1>🔒 PulseBook Datenschutzrichtlinie</h1>
+            <p><strong>Zuletzt aktualisiert:</strong> 1. Juli 2025</p>
+
+            <div class="highlight">
+                <strong>🩺 PulseBook</strong> ist ein informativer medizinischer Assistent, der über Telegram arbeitet. 
+                Wir nehmen den Schutz Ihrer persönlichen Daten und die DSGVO-Compliance ernst.
+            </div>
+
+            <div class="contact">
+                <h2>📞 Kontakt</h2>
+                <p>Bei Datenschutzfragen wenden Sie sich an:</p>
+                <p><strong>Telegram:</strong> @PulseBookSupport</p>
+                <p><strong>Antwortzeit:</strong> innerhalb von 72 Stunden</p>
+            </div>
+        </div>
+
+        <!-- UKRAINIAN -->
+        <div id="uk" class="content-section" style="display: none;">
+            <h1>🔒 Політика конфіденційності PulseBook</h1>
+            <p><strong>Дата останнього оновлення:</strong> 1 липня 2025 року</p>
+
+            <div class="highlight">
+                <strong>🩺 PulseBook</strong> — це інформаційний медичний асистент, що працює через Telegram. 
+                Ми серйозно ставимося до захисту ваших персональних даних та дотримання вимог GDPR.
+            </div>
+
+            <div class="contact">
+                <h2>📞 Контакт</h2>
+                <p>З питань конфіденційності звертайтеся:</p>
+                <p><strong>Telegram:</strong> @PulseBookSupport</p>
+                <p><strong>Час відповіді:</strong> протягом 72 годин</p>
+            </div>
+        </div>
+
+        <!-- RUSSIAN -->
+        <div id="ru" class="content-section" style="display: none;">
             <h1>🔒 Политика конфиденциальности PulseBook</h1>
             <p><strong>Дата последнего обновления:</strong> 1 июля 2025 года</p>
 
@@ -133,13 +377,13 @@
             <h2>🗑️ Удаление данных</h2>
             <p>Вы можете удалить все свои данные в любое время:</p>
             <ul>
-                <li>Зайдите в <strong>Настройки → Удалить все данные</strong></li>
+                <li>Зайдите в <strong>Настройки → Профиль → Удалить все данные</strong></li>
                 <li>Подтвердите удаление кодом безопасности</li>
                 <li>Все данные будут удалены в течение 24 часов</li>
             </ul>
 
-            <h2>📞 Контакты</h2>
             <div class="contact">
+                <h2>📞 Контакты</h2>
                 <p>По вопросам конфиденциальности обращайтесь:</p>
                 <p><strong>Telegram:</strong> @PulseBookSupport</p>
                 <p><strong>Время ответа:</strong> в течение 72 часов</p>
@@ -148,115 +392,6 @@
             <h2>📝 Изменения политики</h2>
             <p>Мы можем обновлять эту политику при изменении законодательства или функций сервиса. 
             О существенных изменениях мы уведомим через бота.</p>
-        </div>
-
-        <!-- ENGLISH -->
-        <div id="en" style="display: none;">
-            <h1>🔒 PulseBook Privacy Policy</h1>
-            <p><strong>Last updated:</strong> July 1, 2025</p>
-
-            <div class="highlight">
-                <strong>🩺 PulseBook</strong> is an informational medical assistant working through Telegram. 
-                We take your personal data protection and GDPR compliance seriously.
-            </div>
-
-            <h2>📊 What data we collect</h2>
-            <ul>
-                <li><strong>Telegram ID</strong> — for user identification</li>
-                <li><strong>Medical documents</strong> — PDF files and images you upload</li>
-                <li><strong>Chat history</strong> — your messages and bot responses</li>
-                <li><strong>Patient profile</strong> — name, age, questionnaire data</li>
-                <li><strong>Usage data</strong> — statistics for service improvement</li>
-            </ul>
-
-            <h2>🎯 How we use data</h2>
-            <ul>
-                <li>Analyzing medical documents and images</li>
-                <li>Providing personalized recommendations</li>
-                <li>Improving service quality</li>
-                <li>Ensuring platform security</li>
-            </ul>
-
-            <h2>🤖 Third-party data sharing</h2>
-            <p>To ensure service functionality, we share data with the following partners:</p>
-            <ul>
-                <li><strong>OpenAI, Google Gemini</strong> — analysis of uploaded data</li>
-                <li><strong>Stripe</strong> — payment processing</li>
-            </ul>
-            
-            <div class="highlight">
-                <strong>⚠️ Important:</strong> We do NOT sell your data to advertisers and do NOT share it with third parties for marketing.
-            </div>
-
-            <h2>🔐 How we protect data</h2>
-            <ul>
-                <li>Data encryption in transit (TLS/SSL)</li>
-                <li>Secure storage in protected database</li>
-                <li>Only you have access to your data</li>
-                <li>Regular encrypted backups</li>
-                <li>24/7 security monitoring</li>
-            </ul>
-
-            <h2>👤 Your rights (GDPR)</h2>
-            <ul>
-                <li><strong>Right to access</strong> — request a copy of your data</li>
-                <li><strong>Right to rectification</strong> — update inaccurate data</li>
-                <li><strong>Right to erasure</strong> — complete account and data deletion</li>
-                <li><strong>Right to portability</strong> — export data in convenient format</li>
-                <li><strong>Right to restriction</strong> — pause data processing</li>
-            </ul>
-
-            <h2>📞 Contact</h2>
-            <div class="contact">
-                <p>For privacy questions contact:</p>
-                <p><strong>Telegram:</strong> @PulseBookSupport</p>
-                <p><strong>Response time:</strong> within 72 hours</p>
-            </div>
-        </div>
-
-        <!-- УКРАЇНСЬКА -->
-        <div id="uk" style="display: none;">
-            <h1>🔒 Політика конфіденційності PulseBook</h1>
-            <p><strong>Дата останнього оновлення:</strong> 1 липня 2025 року</p>
-
-            <div class="highlight">
-                <strong>🩺 PulseBook</strong> — це інформаційний медичний асистент, що працює через Telegram. 
-                Ми серйозно ставимося до захисту ваших персональних даних та дотримання вимог GDPR.
-            </div>
-
-            <h2>📊 Які дані ми збираємо</h2>
-            <ul>
-                <li><strong>Telegram ID</strong> — для ідентифікації користувача</li>
-                <li><strong>Медичні документи</strong> — PDF-файли та зображення, які ви завантажуєте</li>
-                <li><strong>Історія листування</strong> — ваші повідомлення та відповіді бота</li>
-                <li><strong>Профіль пацієнта</strong> — ім'я, вік, анкетні дані</li>
-                <li><strong>Дані використання</strong> — статистика для покращення сервісу</li>
-            </ul>
-
-            <h2>📞 Контакт</h2>
-            <div class="contact">
-                <p>З питань конфіденційності звертайтеся:</p>
-                <p><strong>Telegram:</strong> @PulseBookSupport</p>
-                <p><strong>Час відповіді:</strong> протягом 72 годин</p>
-            </div>
-        </div>
-
-        <!-- DEUTSCH -->
-        <div id="de" style="display: none;">
-            <h1>🔒 PulseBook Datenschutzrichtlinie</h1>
-            <p><strong>Zuletzt aktualisiert:</strong> 1. Juli 2025</p>
-
-            <div class="highlight">
-                <strong>🩺 PulseBook</strong> ist ein informativer medizinischer Assistent, der über Telegram arbeitet. 
-                Wir nehmen den Schutz Ihrer persönlichen Daten und die DSGVO-Compliance ernst.
-            </div>
-
-            <h2>📞 Kontakt</h2>
-            <div class="contact">
-                <p>Bei Datenschutzfragen wenden Sie sich an:</p>
-                <p><strong>Telegram:</strong> @PulseBookSupport</p>
-                <p><strong>Antwortzeit:</strong> innerhalb von 72 Stunden</p>
-            </div>
         </div>
     </div>
 
@@ -269,7 +404,7 @@
                 
                 // Скрываем все языки
                 document.querySelectorAll('[id]').forEach(section => {
-                    if (['ru', 'en', 'uk', 'de'].includes(section.id)) {
+                    if (['en', 'de', 'uk', 'ru'].includes(section.id)) {
                         section.style.display = 'none';
                     }
                 });
@@ -278,6 +413,9 @@
                 document.getElementById(lang).style.display = 'block';
             });
         });
+
+        // По умолчанию показываем английский
+        document.getElementById('en').style.display = 'block';
     </script>
 </body>
 </html>
