@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Народный Гараж - Металлические гаражи и навесы из профнастила</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .phone {
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .phone:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            margin-top: -50px;
+            border-radius: 30px 30px 0 0;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .news-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-date {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .news-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            background: #ddd;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .promo-banner {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="promo-banner">
+        🎁 АКЦИЯ! Замок в подарок до 30.06.25 | Доставка в Киев, Днепр, Харьков - 0 грн!
+    </div>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Народный Гараж</a>
+            <ul class="nav-links">
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#products">Продукция</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#news">Новости</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+            <a href="tel:+380679233693" class="phone">📞 (067) 923-36-93</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Металлические гаражи и навесы</h1>
+            <p>Самые низкие цены в Украине • Гарантия качества • Доставка по всей стране</p>
+            <a href="#contact" class="cta-button">ЗАКАЗАТЬ СЕЙЧАС</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="news" class="news-section">
+            <div class="container">
+                <h2>📰 Последние новости</h2>
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-date">20.05.25</div>
+                        <h3>⚡ Срочное изготовление за 1 день</h3>
+                        <p>Появилась возможность изготовления гаража или навеса за 1 день после поступления заказа!</p>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-date">01.03.25</div>
+                        <h3>💰 Новая цена от 9990 грн</h3>
+                        <p>Новая линейка размеров гаражей и навесов. Покупай гараж или навес по суперцене!</p>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-date">15.02.25</div>
+                        <h3>🎥 3D модели и видео</h3>
+                        <p>На сайте представлена объемная 3D модель оцинкованного гаража и видео-обзор металлического гаража</p>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-date">01.01.25</div>
+                        <h3>🇺🇦 Украинская версия</h3>
+                        <p>Сайт теперь доступен на украинском языке для удобства наших клиентов</p>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-date">06.10.24</div>
+                        <h3>🏗️ Железобетонные гаражи</h3>
+                        <p>В продаже появились железобетонные разборные гаражи высокого качества</p>
+                    </div>
+                    <div class="news-card">
+                        <div class="news-date">01.12.24</div>
+                        <h3>🎁 Дисконтная программа</h3>
+                        <p>Новая накопительная дисконтная программа для дилеров «Премия» со скидками до 15%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="features">
+            <div class="container">
+                <h2>🏭 Наша продукция</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏠</div>
+                        <h3>Металлические гаражи</h3>
+                        <p>Из стали 1,2мм и 2мм. Надежные, долговечные, с многоточечной фиксацией ворот</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⛱️</div>
+                        <h3>Навесы из профнастила</h3>
+                        <p>Легкие, современные конструкции для защиты автомобилей от погодных условий</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Модульные конструкции</h3>
+                        <p>Возможность изготовления нестандартных изделий любой сложности и размеров</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Встроенные замки</h3>
+                        <p>Дополнительные внутренние замки для максимальной безопасности вашего автомобиля</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚛</div>
+                        <h3>Доставка и монтаж</h3>
+                        <p>Профессиональная доставка по всей Украине и качественная установка изделий</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💎</div>
+                        <h3>Оцинкованные гаражи</h3>
+                        <p>Устойчивые к коррозии конструкции с увеличенным сроком эксплуатации</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2>📸 Галерея наших работ</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">Гараж из профнастила с открытыми воротами</div>
+                    <div class="gallery-item">Гараж из профнастила. Общий вид</div>
+                    <div class="gallery-item">Листы крыши гаража</div>
+                    <div class="gallery-item">Каркас крыши гаража</div>
+                    <div class="gallery-item">Внутренний замок гаража</div>
+                    <div class="gallery-item">Надежная крыша из профнастила</div>
+                    <div class="gallery-item">Гараж изнутри</div>
+                    <div class="gallery-item">Полностью установленный гараж</div>
+                    <div class="gallery-item">Гараж из металла 2мм</div>
+                    <div class="gallery-item">Гаражный кооператив</div>
+                    <div class="gallery-item">Двускатный и односкатный варианты</div>
+                    <div class="gallery-item">Готовые к отправке гаражи</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>О компании "Народный гараж"</h2>
+                        <p>Мы специализируемся на производстве и продаже металлических гаражей и навесов из профнастила. Узкая специализация нашего производства и организация конвейерного производства позволила нам свести к минимуму накладные расходы.</p>
+                        <p>Благодаря применению принципов компании-дискаунтера стоимость наших гаражей и навесов самая низкая в Украине при неизменном качестве.</p>
+                        <p>Главными преимуществами наших изделий являются: низкая цена, уникальные конструкторские решения, надежность, долговечность, многоточечная фиксация ворот и гарантия качества.</p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">20+</span>
+                            <span>Дилеров</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">14</span>
+                            <span>Областей Украины</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">20</span>
+                            <span>Лет на рынке</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span>Гарантия качества</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>📞 Свяжитесь с нами</h2>
+                <p>Готовы ответить на все ваши вопросы и помочь с выбором</p>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>📱 Телефон</h3>
+                        <p><strong>(067) 923-36-93</strong></p>
+                        <p>Звоните с 9:00 до 18:00</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>🚚 Доставка</h3>
+                        <p>По всей Украине</p>
+                        <p>В Киев, Днепр, Харьков - БЕСПЛАТНО</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>💰 Оплата</h3>
+                        <p>Наличный и безналичный расчет</p>
+                        <p>Кредит и рассрочка</p>
+                    </div>
+                    <div class="contact-card">
+                        <h3>🛠️ Установка</h3>
+                        <p>Профессиональный монтаж</p>
+                        <p>Гарантия на работы</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Народный Гараж. Все права защищены. | Александр</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.news-card, .feature-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
